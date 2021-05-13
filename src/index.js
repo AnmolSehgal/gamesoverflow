@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import SlideShow from './components/slideshow/SlideShow'
+//components
+import SlideShow from './components/slideshow/SlideShow';
+import WideComponent from '../src/components/wideCard/WideComponent';
 
 
 // import { BrowserRouter as Router } from "react-router-dom";           { impoting files for Nav files }
@@ -18,7 +20,8 @@ const App = ()=>{
       <CssBaseline />
       <Nav />
     </Router> */}
-
+      <WideComponent />
     </div>
+
 }
 ReactDom.render(<App/>, document.getElementById("root"));

@@ -1,0 +1,20 @@
+[
+    {
+        "img":"/images/hood.jpg",
+        "name":"Hitman 3 new DLC - Pride",
+        "disc":"The Season of Pride and the second act of HITMAN 3's Seven Deadly Sins DLC is now available!",
+        "price": "₹1,419"
+    },
+    {
+        "img":"/images/hood.jpg",
+        "name":"Watch Dogs: Legion",
+        "disc":"New co-op missions and new Season Pass character available.",
+        "price": "₹2,999"
+    },
+    {
+        "img":"/images/hood.jpg",
+        "name":"Rogue Company Arms Dealer",
+        "disc":"Complete new missions to earn free cosmetic content!",
+        "price": "Free"
+    }
+]
