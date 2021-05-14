@@ -3,24 +3,26 @@ import ReactDom from 'react-dom';
 //components
 import SlideShow from './components/slideshow/SlideShow';
 import WideComponent from '../src/components/wideCard/WideComponent';
+import { FooterContainer } from './components/react_footer/containers/footer'
 
-
-// import { BrowserRouter as Router } from "react-router-dom";           { impoting files for Nav files }
-// import Nav from "./components/navbar/Nav";
-// import CssBaseline from "@material-ui/core/CssBaseline";
+import { BrowserRouter as Router } from "react-router-dom";        
+import Nav from "./components/navbar/Nav";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 
 
 
 const App = ()=>{
     return <div>
-        <SlideShow/>
-
-        {/* <Router>                         { using components for Nav}
+      <Router>                      
       <CssBaseline />
       <Nav />
-    </Router> */}
+    </Router>
+        <SlideShow/>
+
+        
       <WideComponent />
+      <FooterContainer />
     </div>
 
 }
