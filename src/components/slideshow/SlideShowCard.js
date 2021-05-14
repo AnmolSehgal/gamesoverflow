@@ -1,13 +1,13 @@
 import 'react-slideshow-image/dist/styles.css';
-
+import '../../css/slideshow.css'
 const SlideShowCard =  (props)=>{
     return(
-        <div className="each-slide">
+        <div className="each-fade">
             <div>
-                <img src={props.value.imgSrc} alt={props.value.gameName}/>
+                <img src={props.imgSrc} alt={props.name}/>
             </div>
             <p>
-            {props.value.description}
+                {props.description}
             </p>
         </div>
     )
