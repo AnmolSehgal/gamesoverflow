@@ -8,6 +8,8 @@ import { FooterContainer } from './components/react_footer/containers/footer'
 import { BrowserRouter as Router } from "react-router-dom";        
 import Nav from "./components/navbar/Nav";
 import CssBaseline from "@material-ui/core/CssBaseline";
+// import FaqPage from '../src/components/faqPage/faqPage';
+
 
 
 
@@ -23,6 +25,7 @@ const App = ()=>{
         
       <WideComponent />
       <FooterContainer />
+      {/* <FaqPage /> */}
     </div>
 
 }
