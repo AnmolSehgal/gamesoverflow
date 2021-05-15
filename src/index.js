@@ -10,12 +10,11 @@ import Nav from "./components/navbar/Nav";
 import CssBaseline from "@material-ui/core/CssBaseline";
 // import FaqPage from '../src/components/faqPage/faqPage';
 
-
-
+import LaunchCard from './components/cards/launchCard'
 
 
 const App = ()=>{
-    return <div>
+    return <div style={{backgroundColor: '#131313'}}>
       <Router>                      
       <CssBaseline />
       <Nav />
@@ -24,6 +23,7 @@ const App = ()=>{
 
         
       <WideComponent />
+      <LaunchCard />
       <FooterContainer />
       {/* <FaqPage /> */}
     </div>
