@@ -140,16 +140,16 @@ const Header = (props) => {
       pageURL: "/"
     },
     {
-      menuTitle: "Contact",
-      pageURL: "/contact"
+      menuTitle: "Faq",
+      pageURL: "/faq"
     },
     {
-      menuTitle: "About",
+      menuTitle: "Help",
       pageURL: "/about"
     },
     {
       menuTitle: "Log-In",
-      pageUrl: "/about"
+      pageURL: "/login"
     }
   ];
 
@@ -225,7 +225,7 @@ const Header = (props) => {
                 <Button
                   className={classes.buttonStyle}
                   variant="outline"
-                  onClick={() => handleButtonClick("/contact")}
+                  onClick={() => handleButtonClick("/faq")}
                 >
                   Faq
                 </Button>
@@ -250,10 +250,14 @@ const Header = (props) => {
                   inputProps={{ "aria-label": "search" }}
                 />
               </div>
+              <Button className={classes.buttonStyle}
+                  variant="outline"
+                  onClick={() => handleButtonClick("/login")}>
               <div className={classes.loginWrapper}>
                 <AccountCircleIcon />
                 <Typography>Log-In</Typography>
               </div>
+              </Button>
             </>
           )}
         </Toolbar>

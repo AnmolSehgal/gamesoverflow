@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import Details from '../../../src/objects/details.json';
 import BoxComponent from './BoxComponent';
 
