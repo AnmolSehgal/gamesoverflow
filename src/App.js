@@ -5,7 +5,7 @@ import Nav from "./components/navbar/Nav";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { FooterContainer } from './components/react_footer/containers/footer'
 import FaqPage from '../src/components/faqPage/faqPage';
-import Login from "./components/login/launchLogin";
+import Login from './components/login/mainForm'
 
 import { Route, Switch } from "react-router-dom";
 
