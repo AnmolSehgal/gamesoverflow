@@ -13,6 +13,7 @@ import { withRouter } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -136,8 +137,8 @@ const Header = (props) => {
 
   const menuItems = [
     {
-      menuTitle: "Home",
-      pageURL: "/"
+      menuTitle: "Browse",
+      pageURL: "/browse"
     },
     {
       menuTitle: "Faq",
@@ -150,6 +151,10 @@ const Header = (props) => {
     {
       menuTitle: "Log-In",
       pageURL: "/login"
+    },
+    {
+      menuTitle: "Cart",
+      pageURL: "/cart"
     }
   ];
 
@@ -157,9 +162,15 @@ const Header = (props) => {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+        <Button
+                  className={classes.buttonStyle}
+                  variant="outline"
+                  onClick={() => handleButtonClick("/")}
+                >
+          <Typography style={{color:'#0078F2'}} variant="h6" className={classes.title}>
             GamesOverflow
           </Typography>
+          </Button>
 
           {isMobile ? (
             <>
@@ -218,9 +229,9 @@ const Header = (props) => {
                 <Button
                   className={classes.buttonStyle}
                   variant="outline"
-                  onClick={() => handleButtonClick("/")}
+                  onClick={() => handleButtonClick("/browse")}
                 >
-                  Page
+                  Browse
                 </Button>
                 <Button
                   className={classes.buttonStyle}
@@ -250,6 +261,14 @@ const Header = (props) => {
                   inputProps={{ "aria-label": "search" }}
                 />
               </div>
+              <Button className={classes.buttonStyle}
+                  variant="outline"
+                  onClick={() => handleButtonClick("/cart")}>
+              <div className={classes.loginWrapper}>
+                <ShoppingCartIcon />
+                <Typography>Cart</Typography>
+              </div>
+              </Button>
               <Button className={classes.buttonStyle}
                   variant="outline"
                   onClick={() => handleButtonClick("/login")}>
