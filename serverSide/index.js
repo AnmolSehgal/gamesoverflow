@@ -5,7 +5,7 @@ const db = require('./config/databasesetup');
 const cors = require('cors');
 const UserDetails = require('./models/user');
 const productSchema = require('./models/productSchema');
-
+const router = require('./router/index');
 
 const app = express();
 app.use(cors());
@@ -15,10 +15,6 @@ app.use(
     })
     );
 app.use(bodyParser.json())
-
-const router = require('./router/index');
-
-
 
 
 app.use('/',router);
