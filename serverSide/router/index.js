@@ -8,6 +8,6 @@ router.get('/',(req,res)=>{
 })
 router.use('/users',user);
 router.use('/product',product);
-router.use('/uploads/data/inventory',express.static('uploads'));
+router.use('/uploads/data/inventory',express.static('uploads/data/inventory'));
 
 module.exports = router;
