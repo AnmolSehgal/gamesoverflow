@@ -2,11 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const port  = '8000';
 const db = require('./config/databasesetup');
+const cors = require('cors');
 const UserDetails = require('./models/user');
 const productSchema = require('./models/productSchema');
 
 
 const app = express();
+app.use(cors())
 app.use(
     bodyParser.urlencoded({
         extended: true
