@@ -8,7 +8,7 @@ import styled from "styled-components";
  function CartComponent(props) {
 
   const { cartItems, onAdd, onRemove } = props;
-  const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+  const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.productPrice, 0);
   const taxPrice = itemsPrice * 0.14;
   let totalPrice = 0;
   const shippingPrice = totalPrice > 2000 ? 0 : 20;
@@ -21,10 +21,10 @@ import styled from "styled-components";
       <div>
         {cartItems.length === 0 && <div style={{fontSize:'2.5rem'}}>Cart is empty<HourglassEmptyIcon/></div>}
         {cartItems.map((item) => (
-          <div  style={{fontSize:'2rem',padding:'1rem 0rem'}} key={item.id} className="row">
+          <div  style={{fontSize:'2rem',padding:'1rem 0rem'}} key={item._id} className="row">
             <Box>
-                <Img className="col-2"><img src={item.img} alt={item.name} /></Img>
-                <div className="col-2">{item.name}</div>
+                <Img className="col-2"><img src={`http://localhost:8000${item.productImage}`} alt={item.productName} /></Img>
+                <div className="col-2">{item.productName}</div>
             </Box>
             <div className="col-2">
                 <Button style={{color:'#c2c2c2'}} onClick={() => onRemove(item)} className="remove">
@@ -36,7 +36,7 @@ import styled from "styled-components";
             </div>
 
             <div className="col-2 text-right">
-                {item.qty} x ${item.price.toFixed(2)}
+                {item.qty} x ${item.productPrice.toFixed(2)}
             </div>
           </div>
         ))}

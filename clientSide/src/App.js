@@ -9,7 +9,8 @@ import Login from './components/login/mainForm'
 import Games from "./components/Browse/Games";
 import CartComponent from "./components/cart/CartComponent";
 
-import Datas from './objects/trendingDetails'; 
+// Temporary data
+//import Datas from './objects/trendingDetails'; 
 
 
 import { Route, Switch } from "react-router-dom";
@@ -20,31 +21,34 @@ import axios from "axios";
 
 const App = () => {
 
-  // const [products,setProducts] = useState([]);
+   const [datas,setDatas] = useState([]);
 
   useEffect(() =>{
-    const fetchData =   () =>{
-      // const url = 'http://localhost:8000';
-      // fetch("http://localhost:8000/product/read")
-      //   .then(res => console.log(res))
-      //   .catch(err => console.log(err));
-      // const data = await response.json();
-      // console.log(response)
-         axios.get("http://localhost:8000/product/read").then((res)=>console.log(res)).catch((err)=>console.log(err));
-       //console.log(response);
+    const fetchData =  async  () =>{
+
+         //axios.get("http://localhost:8000/product/read").then((res)=>setDatas(res.data)).catch((err)=>console.log(err));
+         
+         const value = await axios("http://localhost:8000/product/read");
+         //return pro.data;
+    setDatas(value.data);
+    //console.log(pro.data);
+
+         
     }
-   fetchData();
+    fetchData();
+   //console.log(data);
   },[]);
 
-  const { products } = Datas;
+  //Extracting Temporary Data
+  //const { products } = Datas;
   const [cartItems, setCartItems] = useState([]);
 
   const onAdd = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
+    const exist = cartItems.find((x) => x._id === product._id);
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...x, qty: x.qty + 1 } : x
+          x._id === product._id ? { ...x, qty: x.qty + 1 } : x
         )
       );
     } else {
@@ -53,13 +57,13 @@ const App = () => {
     console.log(cartItems);
   };
   const onRemove = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
+    const exist = cartItems.find((x) => x._id === product._id);
     if (exist.qty === 1) {
-      setCartItems(cartItems.filter((x) => x.id !== product.id));
+      setCartItems(cartItems.filter((x) => x._id !== product._id));
     } else {
       setCartItems(
         cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+          x._id === product._id ? { ...exist, qty: exist.qty - 1 } : x
         )
       );
     }
@@ -73,7 +77,7 @@ const App = () => {
       <Switch>
       <Route exact path="/" render={(props) => <Home {...props} />} />
       <Route exact path="/faq" render={(props) => <FaqPage {...props} />} />
-      <Route exact path="/browse" render={(props) =>  <Games onAdd={onAdd} products={products} {...props} />} />
+      <Route exact path="/browse" render={(props) =>  <Games onAdd={onAdd} datas={datas} {...props} />} />
         <Route exact  path="/cart"  render={(props) => <CartComponent cartItems={cartItems}
         onAdd={onAdd}
         onRemove={onRemove}  {...props} />} />
