@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React,{ useState,useEffect } from 'react';
 import Home from "./Home";
 
 import Nav from "./components/navbar/Nav";
@@ -13,11 +13,28 @@ import Datas from './objects/trendingDetails';
 
 
 import { Route, Switch } from "react-router-dom";
+import axios from "axios";
 
 
 
 
 const App = () => {
+
+  // const [products,setProducts] = useState([]);
+
+  useEffect(() =>{
+    const fetchData =   () =>{
+      // const url = 'http://localhost:8000';
+      // fetch("http://localhost:8000/product/read")
+      //   .then(res => console.log(res))
+      //   .catch(err => console.log(err));
+      // const data = await response.json();
+      // console.log(response)
+         axios.get("http://localhost:8000/product/read").then((res)=>console.log(res)).catch((err)=>console.log(err));
+       //console.log(response);
+    }
+   fetchData();
+  },[]);
 
   const { products } = Datas;
   const [cartItems, setCartItems] = useState([]);
