@@ -7,7 +7,9 @@ import MediaCard from "./Game";
 
 
 const Games = ({ datas, onAdd}) => {
-  console.log(datas);
+   console.log(datas);
+
+  //   console.log(x);
 
   return (
       <div style={{display: 'grid','grid-template-columns': 'repeat(auto-fit, minmax(220px, 1fr))',

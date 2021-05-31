@@ -7,9 +7,11 @@ import WideComponent from '../src/components/wideCard/WideComponent';
 import LaunchCard from './components/cards/launchCard'
 
 
-const Home = ()=>{
+const Home = ({ datas })=>{
+        
+
     return ( <div>        
-        <SlideShow/>       
+        <SlideShow datas={datas}/>       
       <WideComponent />
       <LaunchCard />
     </div>

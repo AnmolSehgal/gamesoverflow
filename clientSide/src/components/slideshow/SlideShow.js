@@ -21,11 +21,14 @@ class SlideShow extends React.Component{
 /* { */
     
     render(){
+   const x = this.props.datas.filter(data=>  { return data.productPrice<200});
+
+
         return(
             <div className="slide-container">
                 <Fade autoplay={this.state.autoplay}>
-                {slideShowObj.map(obj=>{
-                        return <SlideShowCard imgSrc = {obj.imgSrc} description = {obj.description} name={obj.gameName}/>
+                {x.map(obj=>{
+                        return <SlideShowCard imgSrc = {`http://localhost:8000${obj.productImage}`} description = {obj.productDescription} name={obj.productName}/>
                     })}
                 </Fade>
             </div>

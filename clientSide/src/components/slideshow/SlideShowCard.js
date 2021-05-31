@@ -4,10 +4,10 @@ const SlideShowCard =  (props)=>{
     return(
         <div className="each-fade">
             <div>
-                <img src={props.imgSrc} alt={props.name}/>
+                <img  src={props.imgSrc} alt={props.name}/>
             </div>
             <p>
-                {props.description}
+                {props.name}<br></br>{props.description}
             </p>
         </div>
     )

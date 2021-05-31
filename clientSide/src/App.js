@@ -29,15 +29,16 @@ const App = () => {
          //axios.get("http://localhost:8000/product/read").then((res)=>setDatas(res.data)).catch((err)=>console.log(err));
          
          const value = await axios("http://localhost:8000/product/read");
-         //return pro.data;
-    setDatas(value.data);
-    //console.log(pro.data);
+        setDatas(value.data);
+        //console.log(value.data);
 
-         
-    }
+      }
     fetchData();
-   //console.log(data);
+    
   },[]);
+
+        //console.log(value.data);
+  
 
   //Extracting Temporary Data
   //const { products } = Datas;
@@ -75,7 +76,7 @@ const App = () => {
       <CssBaseline />
       <Nav />
       <Switch>
-      <Route exact path="/" render={(props) => <Home {...props} />} />
+      <Route exact path="/" render={(props) => <Home datas={datas} {...props} />} />
       <Route exact path="/faq" render={(props) => <FaqPage {...props} />} />
       <Route exact path="/browse" render={(props) =>  <Games onAdd={onAdd} datas={datas} {...props} />} />
         <Route exact  path="/cart"  render={(props) => <CartComponent cartItems={cartItems}

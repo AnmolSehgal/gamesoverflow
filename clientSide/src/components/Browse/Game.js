@@ -58,7 +58,7 @@ const useStyles = makeStyles({
 
 export default function MediaCard(props) {
   const classes = useStyles();
-  console.log(props.data);
+ // console.log(props.data);
 
   return (
     <Card style={{backgroundColor: '#131313',margin:'10px'}} className={classes.root}>
