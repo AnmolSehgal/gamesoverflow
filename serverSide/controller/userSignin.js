@@ -13,7 +13,7 @@ module.exports.signIn = function(req,res){
                                 if(user){
                                     if(user.password===req.body.password){
                                         const token = jwt.sign({username : req.body.email},process.env.TOKEN_SECRET,{expiresIn: '36000s'});
-                                        return res.status(200).json({email:token});
+                                        return res.status(200).json({token:token});
                                     }
                                     else{
                                         return res.status(200).json({message:"invalid password"});
