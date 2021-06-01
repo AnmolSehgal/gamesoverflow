@@ -30,6 +30,7 @@ const App = () => {
          
          const value = await axios("http://localhost:8000/product/read");
         setDatas(value.data);
+        //setToken(value.data[0]);
         //console.log(value.data);
 
       }

@@ -5,6 +5,8 @@ import WideComponent from '../src/components/wideCard/WideComponent';
 
 
 import LaunchCard from './components/cards/launchCard'
+import { withRouter  } from "react-router-dom";
+
 
 
 const Home = ({ datas })=>{
@@ -18,4 +20,4 @@ const Home = ({ datas })=>{
     )
 }
 
-export default Home;
+export default withRouter(Home);

@@ -3,9 +3,20 @@ import './carts.css';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import Button from '@material-ui/core/Button';
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
+
 
 
  function CartComponent(props) {
+
+  const x=localStorage.getItem("token");
+  console.log(x);
+  let history = useHistory();
+
+  function handleClick() {
+    history.push("/login");
+  }
+
 
   const { cartItems, onAdd, onRemove } = props;
   const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.productPrice, 0);
@@ -13,6 +24,13 @@ import styled from "styled-components";
   let totalPrice = 0;
   const shippingPrice = totalPrice > 2000 ? 0 : 20;
    totalPrice = itemsPrice + taxPrice + shippingPrice;
+   if(!x || x==undefined){
+    return (
+      <button type="button" onClick={handleClick}>
+        Go home
+      </button>
+    );
+   }
 
   return (
 
