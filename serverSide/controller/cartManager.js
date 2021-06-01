@@ -27,7 +27,7 @@ module.exports.addtocart = (req,res)=>{
                             q+=parseInt(req.body.quantity);
                             cartdetails.items[itemIndex].quantity=q;
 
-                            cartdetails.items[itemIndex].price =q*cartdetails.items[itemIndex].price;
+                            cartdetails.items[itemIndex].price =q*parseInt(cartdetails.items[itemIndex].pricePerItem);
                             
                             let bill=0;
                             for(let i=0;i<cartdetails.items.length;i++)
@@ -89,7 +89,7 @@ module.exports.addtocart = (req,res)=>{
                                         if(err)
                                         return res.status(400).json({message:err});
                                     
-                                        return res.status(200).json(result);
+                                        return res.status(200).json({message:"added Successfully"});
                                     });
                             })
                     }
