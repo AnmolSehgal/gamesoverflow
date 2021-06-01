@@ -5,12 +5,11 @@ module.exports.getOrder = (req,res)=>{
                             order.find({email:req.user}).sort({date:-1}).then(orders => res.json(orders));
                         }
 module.exports.orderItems = (req,res)=>{
-                        cart.findOne({email:req.user},(err,cartdetail)=>{
-
-                            if(cartdetail.items.length>0)
+                        cart.findOne({email:req.user},(err,cartdetails)=>{
+                            if(cartdetails && cartdetails.items.length>0)
                                 order.create({
                                             email:req.user,
-                                            items:cartdetails.Items,
+                                            items:cartdetails.items,
                                             bill:cartdetails.bill
                                             },(err,result)=>{
                                             if(err)
