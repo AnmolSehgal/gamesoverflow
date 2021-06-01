@@ -174,7 +174,7 @@ const Header = (props) => {
 
           {isMobile ? (
             <>
-              <div className={classes.search}>
+              {/* <div className={classes.search}>                      Search
                 <div className={classes.searchIcon}>
                   <SearchIcon />
                 </div>
@@ -186,7 +186,7 @@ const Header = (props) => {
                   }}
                   inputProps={{ "aria-label": "search" }}
                 />
-              </div>
+              </div> */}
               <>
                 <IconButton
                   edge="start"
@@ -248,7 +248,7 @@ const Header = (props) => {
                   Help
                 </Button>
               </div>
-              <div className={classes.search}>
+              {/* <div className={classes.search}>                           Search
                 <div className={classes.searchIcon}>
                   <SearchIcon />
                 </div>
@@ -260,7 +260,7 @@ const Header = (props) => {
                   }}
                   inputProps={{ "aria-label": "search" }}
                 />
-              </div>
+              </div> */}
               <Button className={classes.buttonStyle}
                   variant="outline"
                   onClick={() => handleButtonClick("/cart")}>

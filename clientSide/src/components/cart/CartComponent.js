@@ -1,21 +1,64 @@
-import React from 'react';
+import React,{ useEffect, useState} from 'react';
 import './carts.css';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import Button from '@material-ui/core/Button';
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+
 
 
 
  function CartComponent(props) {
 
+  const [ fetchedData, setFetchedData] = useState([]);
   const x=localStorage.getItem("token");
-  console.log(x);
+  //console.log(x);
   let history = useHistory();
 
   function handleClick() {
     history.push("/login");
   }
+
+  useEffect(()=>{
+    const fetchData = async () => {
+
+    const x=localStorage.getItem("token");
+      
+      const data = await fetch("http://localhost:8000/cart/getCart",{
+        method:'GET',
+        headers:{
+          Authorization: `Bearer ${x}` ,
+          'Accept':'application/json',
+          'Content-type':'application/json'
+        },
+      })
+      const val= await data.json();
+      setFetchedData(val);
+      console.log(val);
+
+    }
+
+
+    fetchData();
+
+  },
+    []);
+
+    const checkoutHandler = async () => {
+      const x=localStorage.getItem("token");
+      
+      const data = await fetch("http://localhost:8000/order/checkout",{
+        method:'POST',
+        headers:{
+          Authorization: `Bearer ${x}` ,
+          'Accept':'application/json',
+          'Content-type':'application/json'
+        },
+      })
+    console.log(data);
+
+    }
 
 
   const { cartItems, onAdd, onRemove } = props;
@@ -32,17 +75,27 @@ import { useHistory } from "react-router-dom";
     );
    }
 
+   if(fetchedData === null)
+   return (
+    <div style={{backgroundColor:'#131313',color:'#cccccc'}}  className="block col-1">
+    <h2 style={{fontSize:'3.5rem',backgroundColor:'#131313',color:'#cccccc'}}>Cart Items</h2>
+    <div>
+      {fetchedData === null && <div style={{fontSize:'2.5rem'}}>Cart is empty<HourglassEmptyIcon/></div>}
+      </div>
+      </div>
+   );
+
   return (
 
     <div style={{backgroundColor:'#131313',color:'#cccccc'}}  className="block col-1">
       <h2 style={{fontSize:'3.5rem',backgroundColor:'#131313',color:'#cccccc'}}>Cart Items</h2>
       <div>
-        {cartItems.length === 0 && <div style={{fontSize:'2.5rem'}}>Cart is empty<HourglassEmptyIcon/></div>}
-        {cartItems.map((item) => (
-          <div  style={{fontSize:'2rem',padding:'1rem 0rem'}} key={item._id} className="row">
+        {/* {fetchedData.length === null && <div style={{fontSize:'2.5rem'}}>Cart is empty<HourglassEmptyIcon/></div>} */}
+        {fetchedData.map((item) => (
+          <div  style={{fontSize:'2rem',padding:'1rem 0rem'}} key={item.productId} className="row">
             <Box>
-                <Img className="col-2"><img src={`http://localhost:8000${item.productImage}`} alt={item.productName} /></Img>
-                <div className="col-2">{item.productName}</div>
+                <Img className="col-2"><img src={`http://localhost:8000${item.productImage}`} alt={item._id} /></Img>
+                {/* <div className="col-2">{item._id}</div> */}
             </Box>
             <div className="col-2">
                 <Button style={{color:'#c2c2c2'}} onClick={() => onRemove(item)} className="remove">
@@ -54,15 +107,16 @@ import { useHistory } from "react-router-dom";
             </div>
 
             <div className="col-2 text-right">
-                {item.qty} x ${item.productPrice.toFixed(2)}
+                {item.quantity} x ${item.price.toFixed(2)}
             </div>
           </div>
+          
         ))}
 
-        {cartItems.length !== 0 && (
+        { (
           <>
             <hr></hr>
-            <Row style={{fontSize:'2rem'}}>
+            {/* <Row style={{fontSize:'2rem'}}>
               <div className="col-2">Items Price :</div>
               <div className="col-1 text-right">${itemsPrice.toFixed(2)}</div>
             </Row>
@@ -75,7 +129,7 @@ import { useHistory } from "react-router-dom";
               <div className="col-1 text-right">
                 ${shippingPrice.toFixed(2)}
               </div>
-            </Row>
+            </Row> */}
 
             <Row style={{fontSize:'2rem'}}>
               <div className="col-2">
@@ -87,7 +141,7 @@ import { useHistory } from "react-router-dom";
             </Row>
             <hr />
             <div className="row">
-              <Button style={{backgroundColor:'#0078f2',color:'#c2c2c2',margin:'1rem 0rem'}}  onClick={() => alert('Implement Checkout!')}>
+              <Button style={{backgroundColor:'#0078f2',color:'#c2c2c2',margin:'1rem 0rem'}}  onClick={ checkoutHandler }>
                 Checkout
               </Button>
             </div>
