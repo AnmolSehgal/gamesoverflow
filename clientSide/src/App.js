@@ -22,6 +22,7 @@ import axios from "axios";
 const App = () => {
 
    const [datas,setDatas] = useState([]);
+   
 
   useEffect(() =>{
     const fetchData =  async  () =>{
@@ -44,31 +45,52 @@ const App = () => {
   //Extracting Temporary Data
   //const { products } = Datas;
   const [cartItems, setCartItems] = useState([]);
+  const [car, setCar] = useState(1);
+
 
   
 
   const removeHandler = async (item) => {
-    const x=localStorage.getItem("token");
-    const payload={
-      productId:item.productId,
-      quantity:-1
-    }
-    
-  
-     const val = fetch("http://localhost:8000/cart/delete",{
-        method:'POST',
-        headers:{
-          Authorization: `Bearer ${x}` ,
-          'Content-type':'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-      const a=await val
-      console.log(a);
+     const x=localStorage.getItem("token");
+     setCar(car-1);
+     if(item.quantity==1){
+     const payload={
+       productId:item.productId,
+       quantity:-1
+     }
+      const val = fetch("http://localhost:8000/cart/delete",{
+         method:'POST',
+         headers:{
+           Authorization: `Bearer ${x}` ,
+           'Content-type':'application/json'
+         },
+         body: JSON.stringify(payload)
+       })
+       const a=await val
+       console.log(a);
+      }
+      else{
+        const payload={
+          productId:item.productId,
+          quantity:-1
+        }
+        
+      
+         const val = fetch("http://localhost:8000/cart/addToCart",{
+            method:'POST',
+            headers:{
+              Authorization: `Bearer ${x}` ,
+              'Content-type':'application/json'
+            },
+            body: JSON.stringify(payload)
+          })
+          const a=await val
+      }
    }
 
    const addHandler = async (item) => {
     const x=localStorage.getItem("token");
+    setCar(car+1);
     const payload={
       productId:item.productId,
       quantity:1
@@ -97,6 +119,7 @@ const App = () => {
       <Route exact path="/browse" render={(props) =>  <Games  datas={datas} {...props} />} />
         <Route exact  path="/cart"  render={(props) => <CartComponent cartItems={cartItems}
         addHandler={addHandler}
+        car={car}
         removeHandler={removeHandler}  {...props} />} />
       <Route exact path="/login" render={(props) => <Login {...props} />} />
         

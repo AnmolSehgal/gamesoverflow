@@ -9,7 +9,7 @@ import axios from "axios";
 
 
 
- function CartComponent({addHandler, removeHandler,  cartItems}) {
+ function CartComponent({addHandler, removeHandler, car,  cartItems}) {
 
   const [ fetchedData, setFetchedData] = useState([]);
   const x=localStorage.getItem("token");
@@ -35,7 +35,7 @@ import axios from "axios";
       })
       const val= await data.json();
       setFetchedData(val);
-      console.log(val);
+      //console.log(val);
 
     }
 
@@ -43,6 +43,29 @@ import axios from "axios";
     fetchData();
 
   },[]);
+
+  useEffect( ()=>{
+    const fetchData = async () => {
+
+      const x=localStorage.getItem("token");
+        
+        const data = await fetch("http://localhost:8000/cart/getCart",{
+          method:'GET',
+          headers:{
+            Authorization: `Bearer ${x}` ,
+            'Accept':'application/json',
+            'Content-type':'application/json'
+          },
+        })
+        const val= await data.json();
+        setFetchedData(val);
+        console.log(val);
+  
+      }
+      fetchData();
+  
+    },[car]
+  );
 
     const checkoutHandler = async () => {
       const x=localStorage.getItem("token");
@@ -55,7 +78,7 @@ import axios from "axios";
           'Content-type':'application/json'
         },
       })
-    console.log(data);
+    //console.log(data);
 
     }
 
@@ -67,8 +90,8 @@ import axios from "axios";
    totalPrice = itemsPrice + taxPrice + shippingPrice;
    if(!x || x==undefined){
     return (
-      <button type="button" onClick={handleClick}>
-        Go home
+      <button style={{margin:'1rem 0rem',fontSize:'2.5rem'}} type="button" onClick={handleClick}>
+        Please Log-In
       </button>
     );
    }
@@ -98,7 +121,7 @@ import axios from "axios";
           <div  style={{fontSize:'2rem',padding:'1rem 0rem'}} key={item.productId} className="row">
             <Box>
                 <Img className="col-2"><img src={`http://localhost:8000${item.productImage}`} alt={item._id} /></Img>
-                {/* <div className="col-2">{item._id}</div> */}
+                <div className="col-2">{item.productName}</div>
             </Box>
             <div className="col-2">
                 <Button style={{color:'#c2c2c2'}} onClick={()=> removeHandler(item)} className="remove">

@@ -179,7 +179,7 @@ const Header = (props) => {
     userValue =<Button className={classes.buttonStyle} variant="outline" onClick={() => handleButtonClick("/login")}>
                   <div className={classes.loginWrapper}>
                       <AccountCircleIcon />
-                      <Typography> Log-In </Typography>
+                      <Typography> Log- In </Typography>
                   </div>
                 </Button>;
   }
