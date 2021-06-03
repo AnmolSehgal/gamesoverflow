@@ -158,6 +158,32 @@ const Header = (props) => {
     }
   ];
 
+  const x=localStorage.getItem("token");
+
+  const logoutHandler = (pageURL) => {
+    history.push(pageURL);
+    const val = "";
+    localStorage.setItem("token",val);
+    
+  }
+
+  let userValue;
+  if (x) {
+    userValue =<Button className={classes.buttonStyle} variant="outline" onClick={() => logoutHandler("/login")}>
+                  <div className={classes.loginWrapper}>
+                      <AccountCircleIcon />
+                      <Typography> Log-Out </Typography>
+                  </div>
+                </Button>;
+  } else {
+    userValue =<Button className={classes.buttonStyle} variant="outline" onClick={() => handleButtonClick("/login")}>
+                  <div className={classes.loginWrapper}>
+                      <AccountCircleIcon />
+                      <Typography> Log-In </Typography>
+                  </div>
+                </Button>;
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
@@ -174,19 +200,7 @@ const Header = (props) => {
 
           {isMobile ? (
             <>
-              {/* <div className={classes.search}>                      Search
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder="Search…"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput
-                  }}
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </div> */}
+              
               <>
                 <IconButton
                   edge="start"
@@ -269,14 +283,9 @@ const Header = (props) => {
                 <Typography>Cart</Typography>
               </div>
               </Button>
-              <Button className={classes.buttonStyle}
-                  variant="outline"
-                  onClick={() => handleButtonClick("/login")}>
-              <div className={classes.loginWrapper}>
-                <AccountCircleIcon />
-                <Typography>Log-In</Typography>
+              <div>
+                {userValue}
               </div>
-              </Button>
             </>
           )}
         </Toolbar>

@@ -9,7 +9,7 @@ import axios from "axios";
 
 
 
- function CartComponent(props) {
+ function CartComponent({addHandler, removeHandler,  cartItems}) {
 
   const [ fetchedData, setFetchedData] = useState([]);
   const x=localStorage.getItem("token");
@@ -42,8 +42,7 @@ import axios from "axios";
 
     fetchData();
 
-  },
-    []);
+  },[]);
 
     const checkoutHandler = async () => {
       const x=localStorage.getItem("token");
@@ -61,7 +60,6 @@ import axios from "axios";
     }
 
 
-  const { cartItems, onAdd, onRemove } = props;
   const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.productPrice, 0);
   const taxPrice = itemsPrice * 0.14;
   let totalPrice = 0;
@@ -85,6 +83,11 @@ import axios from "axios";
       </div>
    );
 
+  
+
+
+   
+
   return (
 
     <div style={{backgroundColor:'#131313',color:'#cccccc'}}  className="block col-1">
@@ -98,10 +101,10 @@ import axios from "axios";
                 {/* <div className="col-2">{item._id}</div> */}
             </Box>
             <div className="col-2">
-                <Button style={{color:'#c2c2c2'}} onClick={() => onRemove(item)} className="remove">
+                <Button style={{color:'#c2c2c2'}} onClick={()=> removeHandler(item)} className="remove">
                 -
                 </Button>{' '}
-                <Button style={{backgroundColor:'#0078f2',color:'#c2c2c2'}} onClick={() => onAdd(item)} className="add">
+                <Button style={{backgroundColor:'#0078f2',color:'#c2c2c2'}} onClick={() => addHandler(item)} className="add">
                 +
                 </Button>
             </div>

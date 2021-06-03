@@ -45,31 +45,46 @@ const App = () => {
   //const { products } = Datas;
   const [cartItems, setCartItems] = useState([]);
 
-  const onAdd = (product) => {
-    const exist = cartItems.find((x) => x._id === product._id);
-    if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
-          x._id === product._id ? { ...x, qty: x.qty + 1 } : x
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
+  
+
+  const removeHandler = async (item) => {
+    const x=localStorage.getItem("token");
+    const payload={
+      productId:item.productId,
+      quantity:-1
     }
-    console.log(cartItems);
-  };
-  const onRemove = (product) => {
-    const exist = cartItems.find((x) => x._id === product._id);
-    if (exist.qty === 1) {
-      setCartItems(cartItems.filter((x) => x._id !== product._id));
-    } else {
-      setCartItems(
-        cartItems.map((x) =>
-          x._id === product._id ? { ...exist, qty: exist.qty - 1 } : x
-        )
-      );
+    
+  
+     const val = fetch("http://localhost:8000/cart/delete",{
+        method:'POST',
+        headers:{
+          Authorization: `Bearer ${x}` ,
+          'Content-type':'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      const a=await val
+      console.log(a);
+   }
+
+   const addHandler = async (item) => {
+    const x=localStorage.getItem("token");
+    const payload={
+      productId:item.productId,
+      quantity:1
     }
-  };
+    
+  
+     const val = fetch("http://localhost:8000/cart/addToCart",{
+        method:'POST',
+        headers:{
+          Authorization: `Bearer ${x}` ,
+          'Content-type':'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      const a=await val
+   }
 
 
     return (        
@@ -79,10 +94,10 @@ const App = () => {
       <Switch>
       <Route exact path="/" render={(props) => <Home datas={datas} {...props} />} />
       <Route exact path="/faq" render={(props) => <FaqPage {...props} />} />
-      <Route exact path="/browse" render={(props) =>  <Games onAdd={onAdd} datas={datas} {...props} />} />
+      <Route exact path="/browse" render={(props) =>  <Games  datas={datas} {...props} />} />
         <Route exact  path="/cart"  render={(props) => <CartComponent cartItems={cartItems}
-        onAdd={onAdd}
-        onRemove={onRemove}  {...props} />} />
+        addHandler={addHandler}
+        removeHandler={removeHandler}  {...props} />} />
       <Route exact path="/login" render={(props) => <Login {...props} />} />
         
         </Switch>

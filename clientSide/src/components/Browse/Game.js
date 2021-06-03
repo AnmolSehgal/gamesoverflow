@@ -24,7 +24,6 @@ export default function MediaCard(props) {
   //console.log(props.data);
 
  const clickHandler = async  () => {
-  props.onAdd(props.data);
   const x=localStorage.getItem("token");
   //console.log(x);
   const payload={
