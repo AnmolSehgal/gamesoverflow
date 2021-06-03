@@ -1,4 +1,4 @@
-const cart = require('../models/cartSchema');
+const cart = require('../models/cartModel');
 const productdetails  =require('../models/productSchema');
 module.exports.getCart = (req,res)=>{
         cart.findOne({email:req.user},(err,cartdetails)=>{
@@ -26,8 +26,6 @@ module.exports.addtocart = (req,res)=>{
                             let q = parseInt(cartdetails.items[itemIndex].quantity);
                             q+=parseInt(req.body.quantity);
                             cartdetails.items[itemIndex].quantity=q;
-
-                            cartdetails.items[itemIndex].price =q*parseInt(cartdetails.items[itemIndex].pricePerItem);
                             
                             let bill=0;
                             for(let i=0;i<cartdetails.items.length;i++)
@@ -47,10 +45,10 @@ module.exports.addtocart = (req,res)=>{
                             productdetails.findOne({productId:req.body.productId},function(err,prod){
                                     const obj= {
                                             productId:prod.productId,
+                                            productName:prod.productName,
                                             productImage:prod.productImage,
                                             quantity:1,
-                                            price:prod.productPrice,
-                                            pricePerItem:prod.productPrice
+                                            price:prod.productPrice
                                     };
                                     cartdetails.items.push(obj);
                                     let bill=0;
@@ -77,10 +75,10 @@ module.exports.addtocart = (req,res)=>{
                                             items:[
                                                 {
                                                     productId:prod.productId,
+                                                    productName:prod.productName,
                                                     productImage:prod.productImage,
-                                                    price:prod.productPrice,
-                                                    pricePerItem:prod.productPrice,
-                                                    quantity:1
+                                                    quantity:1,
+                                                    price:prod.productPrice
                                                 }
                                             ],
                                             bill:prod.productPrice,

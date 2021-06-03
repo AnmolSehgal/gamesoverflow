@@ -1,4 +1,4 @@
-const cart = require('../models/cartSchema');
+const cart = require('../models/cartModel');
 const order = require('../models/order');
 
 module.exports.getOrder = (req,res)=>{
